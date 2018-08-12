@@ -59,6 +59,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     }
 
+    public void clearApplications() {
+        int size = this.newsDatabase.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                newsDatabase.remove(0);
+            }
+
+            this.notifyItemRangeRemoved(0, size);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return newsDatabase == null ? 0 : newsDatabase.size();

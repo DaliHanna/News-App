@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     RecyclerView recyclerView;
     ProgressBar progressBar;
     Button tryAgain;
+     NewsAdapter newsAdapter;
     private static final int NEWS_LOADER_ID = 1;
     public static final String NEWS_REQUEST_URL = "https://content.guardianapis.com/search";
 
@@ -129,7 +130,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(@NonNull Loader<List<NewsArticle>> loader, List<NewsArticle> newsArticles) {
         if (newsArticles != null && !newsArticles.isEmpty()) {
-            final NewsAdapter newsAdapter = new NewsAdapter(MainActivity.this, newsArticles);
+
+            newsAdapter = new NewsAdapter(MainActivity.this, newsArticles);
             recyclerView.setAdapter(newsAdapter);
             progressBar.setVisibility(View.GONE);
         } else {
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<NewsArticle>> loader) {
+        newsAdapter.clearApplications();
     }
 
     @Override
